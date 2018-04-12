@@ -1,0 +1,3 @@
+create user engineer with createdb password 'ok';
+
+CREATE DATABASE "$1" WITH OWNER "$1" ENCODING 'UTF8' LC_COLLATE='nb_NO.utf8' LC_CTYPE='nb_NO.utf8' TEMPLATE=template0;

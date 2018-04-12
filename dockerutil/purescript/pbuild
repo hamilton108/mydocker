@@ -1,0 +1,83 @@
+#!/bin/bash
+
+usage()
+{
+cat << EOF
+usage: $0 options
+
+OPTIONS:
+   -h      Show this message
+   -d      Output directory (default: dist)
+   -f      Output file name, without .js (default: main)
+   -m      Main module (default: Main)
+   -s      Skip entry point (default: false)
+   -x      Export module (default: false)
+   -X      Export module name (default: PS.Main)
+EOF
+}
+
+OUTPUT_DIR="dist"
+
+OUTPUT_FILE="main"
+
+SKIP_ENTRY_POINT=0
+
+MAIN_MODULE="Main"
+
+EXPORT_MODULE=0
+
+EXPORT_MODULE_NAME="PS.Main"
+
+while getopts "d:f:m:sxX:" OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         d)
+             OUTPUT_DIR=$OPTARG
+             ;;
+         f)
+             OUTPUT_FILE=$OPTARG
+             ;;
+         m)
+             MAIN_MODULE=$OPTARG
+             ;;
+         s)
+             SKIP_ENTRY_POINT=1
+             ;;
+         x)
+             EXPORT_MODULE=1
+             ;;
+         x)
+             EXPORT_MODULE_NAME=$OPTARG
+             ;;
+         ?)
+             usage
+             exit
+             ;;
+     esac
+done
+
+OUTPUT_JS="$OUTPUT_DIR/$OUTPUT_FILE.js"
+
+if [ $SKIP_ENTRY_POINT -eq 0 ]
+then
+    if [ $EXPORT_MODULE -eq 0 ]
+    then
+        pulp build -O --to $OUTPUT_JS --main $MAIN_MODULE 
+    else
+        pulp build -O --to $OUTPUT_JS --main $MAIN_MODULE && echo module.exports = $EXPORT_MODULE_NAME >> $OUTPUT_JS
+    fi
+else
+    if [ $EXPORT_MODULE -eq 0 ]
+    then
+        pulp build -O --to $OUTPUT_JS --skip-entry-point --main $MAIN_MODULE 
+    else
+        pulp build -O --to $OUTPUT_JS --skip-entry-point --main $MAIN_MODULE && echo module.exports = $EXPORT_MODULE_NAME >> $OUTPUT_JS
+    fi
+fi
+
+
+exit 0

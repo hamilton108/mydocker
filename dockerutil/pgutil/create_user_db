@@ -1,0 +1,5 @@
+create user engineer with createdb password 'ok';
+
+create database engineer owner engineer;
+
+

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+HOME="/home/x"
+
+JS="$HOME/tmp2"
+
+# ELM="$HOME/elm/src"
+
+docker run -it --rm -v $JS:/spec --name jasmine x/node jasmine "$@"
+
+exit 0

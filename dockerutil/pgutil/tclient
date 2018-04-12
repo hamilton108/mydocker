@@ -1,0 +1,5 @@
+#!/bin/bash
+
+psql -U trader -d trader -h 172.17.0.1
+
+exit 0

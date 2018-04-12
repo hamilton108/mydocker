@@ -1,0 +1,5 @@
+i#!/bin/bash
+
+docker run -d --name rstudio1 -v $(pwd):/home/rstudio/ -e ROOT=TRUE rocker/rstudio:3.4.1
+
+exit 0

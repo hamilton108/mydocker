@@ -1,0 +1,65 @@
+#!/bin/bash
+
+PG_VER=""$1"/postgres:1.0"
+
+
+usage()
+{
+cat << EOF
+usage: $0 options
+
+OPTIONS:
+   -h      Show this message
+   -d      Database name 
+   -f      Dump file 
+   -c      Container name (default: postgres_hilo)
+EOF
+}
+
+DATABASE_NAME=
+DUMP_FILE=
+CONTAINER_NAME="postgres_hilo"
+
+while getopts "hd:f:c:" OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         d)
+             DATABASE_NAME=$OPTARG
+             ;;
+         f)
+             DUMP_FILE=$OPTARG
+             ;;
+         c)
+             CONTAINER_NAME=$OPTARG
+             ;;
+         ?)
+             usage
+             exit
+             ;;
+     esac
+done
+
+if [ -z $DATABASE_NAME ]
+then
+     echo "Database name must be set" 
+     exit 1
+fi
+if [ -z $DUMP_FILE ]
+then
+     echo "Dump file must be set" 
+     exit 1
+fi
+
+echo "Importing dump file '$DUMP_FILE' to database '$DATABASE_NAME'... (container: $CONTAINER_NAME)"
+
+docker run --rm --interactive --link $CONTAINER_NAME:postgres --volume $PWD/:/tmp/ $PG_VER \
+    bash -c "export PGPASSWORD='ok'; exec psql -h postgres -p 5432 -U postgres -d $DATABASE_NAME < /tmp/$DUMP_FILE"
+
+#    bash -c 'export PGPASSWORD='ok'; exec psql -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d $DATABASE_NAME < /tmp/$DUMP_FILE'
+
+
+exit 0

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker build -t "$1"/svn:1.0 . 
+
+exit 0

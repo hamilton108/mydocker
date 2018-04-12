@@ -1,0 +1,8 @@
+#!/bin/bash
+
+PG_VER=9.6.2
+
+docker run -it --link postgres2:postgres --rm postgres:$PG_VER psql -h postgres -U postgres
+
+exit 0
+

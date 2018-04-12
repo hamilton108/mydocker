@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+LANG="$1"
+THRIFT_FILE="$2"
+
+if [[ -z $LANG ]]; then
+    echo "First arg must be language"
+    exit 1
+fi
+
+if [[ -z $THRIFT_FILE ]]; then
+    echo "Second arg must be thrift file"
+    exit 1
+fi
+
+docker run -v "$PWD:/data" thrift thrift -o /data --gen $LANG /data/$THRIFT_FILE
+
+exit 0

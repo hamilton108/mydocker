@@ -1,0 +1,10 @@
+#!/bin/bash
+
+MONGO_VER="mongo:3.7-jessie"
+
+CONTAINER_NAME="mongo1"
+
+# docker run -it --link $CONTAINER_NAME:mongo --rm $MONGO_VER sh -c 'exec mongo "$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT/maunaloa"'
+docker run -it --link $CONTAINER_NAME:mongo --rm $MONGO_VER sh -c 'exec mongo "$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT/monger-test"'
+
+exit 0

@@ -1,0 +1,83 @@
+#!/bin/bash
+
+PG_VER=""$1"/postgres:1.0"
+
+
+usage()
+{
+cat << EOF
+usage: $0 options
+
+OPTIONS:
+   -h      Show this message
+   -d      Database name. Default: (\$DATABASE_NAME.dmp)
+   -r      Dump dir. Default: $PWD 
+   -f      Dump file 
+   -c      Container name (default: postgres_hilo)
+   -x      Gzip dump file. Default: false
+EOF
+}
+
+DATABASE_NAME=
+DUMP_FILE=
+CONTAINER_NAME="postgres_hilo"
+DUMP_DIR=
+GZIP="0"
+
+while getopts "hd:r:f:c:x" OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         d)
+             DATABASE_NAME=$OPTARG
+             ;;
+         r)
+             DUMP_DIR=$OPTARG
+             ;;
+         f)
+             DUMP_FILE=$OPTARG
+             ;;
+         c)
+             CONTAINER_NAME=$OPTARG
+             ;;
+         x)
+             GZIP="1"
+             ;;
+         ?)
+             usage
+             exit
+             ;;
+     esac
+done
+
+if [ -z $DATABASE_NAME ]
+then
+     echo "Database name must be set" 
+     exit 1
+fi
+if [ -z $DUMP_FILE ]
+then
+    DUMP_FILE="$DATABASE_NAME.dump"
+fi
+if [ -z $DUMP_DIR ]
+then
+    DUMP_DIR=$PWD
+fi
+
+echo "Exporting database '$DATABASE_NAME' to dump file '$DUMP_FILE' ... (container: $CONTAINER_NAME)"
+
+docker run --rm --interactive --link $CONTAINER_NAME:postgres --volume $DUMP_DIR/:/tmp/ $PG_VER \
+    bash -c "export PGPASSWORD='ok'; exec pg_dump -h postgres -p 5432 -U postgres -d $DATABASE_NAME > /tmp/$DUMP_FILE"
+
+if [ $GZIP == "1" ];
+then
+    gzip --best -f $DUMP_DIR/$DUMP_FILE
+fi
+
+#    bash -c 'export PGPASSWORD='ok'; exec psql -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d $DATABASE_NAME < /tmp/$DUMP_FILE'
+
+
+exit 0

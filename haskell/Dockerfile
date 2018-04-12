@@ -1,0 +1,14 @@
+FROM haskell:8.2.1
+
+MAINTAINER Hamilton 
+
+RUN apt-get update 
+
+RUN apt-get -y install libblas-dev libatlas-dev liblapack-dev libgsl0-dev libghc-postgresql-libpq-dev libicu-dev
+
+# RUN cabal update
+
+# RUN cabal install hmatrix hunit containers xml mtl postgresql-simple utf8-string cmdlib cmdargs
+
+ENTRYPOINT ["/bin/bash"]
+

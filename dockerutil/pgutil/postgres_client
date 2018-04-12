@@ -1,0 +1,59 @@
+#!/bin/bash
+
+PG_VER=""$1"/postgres:1.0"
+
+usage()
+{
+cat << EOF
+usage: $0 options
+
+OPTIONS:
+   -h      Show this message
+   -d      Database name (default: none)
+   -p      Port (default: 5432)
+   -u      User name (default: postgres) 
+   -c      Container name (default: postgres_hilo) 
+EOF
+}
+
+DATABASE_NAME=
+PORT="5432"
+USER_NAME="postgres"
+CONTAINER_NAME="postgres_hilo"
+
+while getopts "hd:u:c:" OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         d)
+             DATABASE_NAME=$OPTARG
+             ;;
+         p)
+             PORT=$OPTARG
+             ;;
+         u)
+             USER_NAME=$OPTARG
+             ;;
+         c)
+             CONTAINER_NAME=$OPTARG
+             ;;
+         ?)
+             usage
+             exit
+             ;;
+     esac
+done
+
+if [ -z $DATABASE_NAME ]
+then
+    docker run -it --link $CONTAINER_NAME:postgres --rm $PG_VER psql -h postgres -p $PORT -U $USER_NAME
+else
+    docker run -it --link $CONTAINER_NAME:postgres --rm $PG_VER psql -h postgres -p $PORT -U $USER_NAME -d $DATABASE_NAME 
+fi
+
+
+exit 0
+

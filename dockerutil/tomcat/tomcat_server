@@ -1,0 +1,9 @@
+#!/bin/bash
+
+TOMCAT_VER="tomcat:9.0-jre8-alpine"
+
+# docker run --name TOMCAT1 -it --rm -p 8080:8080 -v $(pwd)/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml:ro  -v $(pwd)/context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml $TOMCAT_VER # --auth
+
+docker run --name TOMCAT1 -it --rm -p 8080:8080 -v /my.war:/their.war $TOMCAT_VER 
+
+exit 0

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+docker exec -i -t TOMCAT1 /bin/bash
+
+#cat conf/tomcat-users.xml   # check if your file is loaded
+
+exit 0

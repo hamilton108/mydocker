@@ -1,0 +1,7 @@
+#!/bin/bash
+
+docker run -it --rm -v /home/"$1"/opt:/home/"$1"/opt -v /home/"$1"/.cabal:/root/.cabal "$1"/haskell:1.0  
+
+exit 0
+
+

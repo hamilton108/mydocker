@@ -1,0 +1,5 @@
+#!/bin/bash
+
+psql -U postgres -d engineer -h 172.17.0.1 < engineer2-2016.8.16.dump
+
+exit 0

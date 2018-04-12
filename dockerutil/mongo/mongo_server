@@ -1,0 +1,11 @@
+#!/bin/bash
+
+MONGO_VER="mongo:3.7-jessie"
+
+VOLUME="/home/"$1"/database/dockervolumes/mongo"
+
+CONTAINER_NAME="mongo1"
+
+docker run --name $CONTAINER_NAME -v $VOLUME:/data/db -d $MONGO_VER # --auth
+
+exit 0

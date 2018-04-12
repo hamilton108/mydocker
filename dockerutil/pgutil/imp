@@ -1,0 +1,5 @@
+#!/bin/bash
+
+psql -U postgres -d trader  -h 172.17.0.1 < trader2.dump
+
+exit 0

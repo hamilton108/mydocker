@@ -1,0 +1,9 @@
+#!/bin/bash
+
+CONTAINER_NAME=mongo1
+
+docker exec -it $CONTAINER_NAME mongo admin 
+
+# db.createUser({ user: 'user', pwd: 'ok', roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] }); 
+
+exit 0
