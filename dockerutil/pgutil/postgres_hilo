@@ -1,8 +1,8 @@
 #!/bin/bash
 
-LOCAL_VOL=/home/"$1"/database/dockervolumes/postgres/data
+LOCAL_VOL=/home/rcs/database/dockervolumes/postgres/data
 
-PG_VER=""$1"/postgres:1.0"
+PG_VER="rcs/postgres:1.0"
 
 docker run --name postgres_hilo -v  $LOCAL_VOL:/var/lib/postgresql/data -e POSTGRES_PASSWORD=ok -p 5432:5432 -d $PG_VER
 

@@ -2,7 +2,7 @@
 
 PG_VER=9.6.2
 
-LOCAL_VOL=/media/"$1"/ed11bb40-d507-4568-ac47-d61f406759f6/dockervolumes/postgres/data
+LOCAL_VOL=/media/rcs/ed11bb40-d507-4568-ac47-d61f406759f6/dockervolumes/postgres/data
 
 # LOCAL_VOL=/var/lib/postgresql/data
 
