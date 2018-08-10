@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker build -t rcs/purescript:1.0 . 
+docker build -t rcs/purescript:0.12 .
 
 exit 0
