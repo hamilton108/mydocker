@@ -1,0 +1,7 @@
+#!/bin/bash
+
+NODE_VER="9.11-alpine"
+
+docker run -it --rm -v "$PWD":/usr/src/app -w /usr/src/app node:$NODE_VER node "$@"
+
+exit 0
