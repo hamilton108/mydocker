@@ -2,8 +2,19 @@
 
 LOC="rcs"
 
+HASKELL_VER="8.4"
+
+if [[ -z "$1" ]]; then
+    echo "Using d|efault Haskell version: $HASKELL_VER"
+else
+    HASKELL_VER="$1"
+fi
+
+
 # docker run -it --rm -v /home/"$1"/opt:/home/"$1"/opt -v /home/"$1"/.cabal:/root/.cabal "$1"/haskell:1.0  
-docker run -it --rm -v /home/"$LOC"/opt:/home/"$LOC"/opt -v /home/"$LOC"/.cabal:/root/.cabal "$LOC"/haskell:8.2
+docker run -it --rm -v /home/"$LOC"/opt:/home/"$LOC"/opt -v /home/"$LOC"/.cabal:/root/.cabal "$LOC"/haskell:$HASKELL_VER
+
+echo $HASKELL_VER 
 
 exit 0
 

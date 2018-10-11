@@ -1,10 +1,15 @@
-FROM haskell:8.2.1
+FROM haskell:8.4
 
 MAINTAINER Hamilton 
 
 RUN apt-get update 
 
-RUN apt-get -y install libblas-dev libatlas-dev liblapack-dev libgsl0-dev libghc-postgresql-libpq-dev libicu-dev
+# RUN apt-get -y install libblas-dev libatlas-dev liblapack-dev libgsl0-dev libghc-postgresql-libpq-dev libicu-dev libtinfo-dev curl
+RUN apt-get -y install libblas-dev libatlas-dev liblapack-dev libgsl0-dev libghc-postgresql-libpq-dev libicu-dev 
+
+# RUN curl -sSL https://get.haskellstack.org/ | sh
+
+# RUN wget -qO- https://get.haskellstack.org/ | sh
 
 # RUN cabal update
 
