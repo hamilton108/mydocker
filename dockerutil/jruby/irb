@@ -2,6 +2,6 @@
 
 JRUBY_VER=9.2-alpine
 
-docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp jruby:$JRUBY_VER irb
+docker run -it --rm -v /home/rcs/opt:/home/rcs/opt -v "$PWD":/usr/src/myapp -w /usr/src/myapp jruby:$JRUBY_VER irb
 
 exit 0
