@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker run --rm -it -v $PWD:/usr/local/share/common-lisp/source daewok/lisp-devel:latest sbcl
+
+exit 0

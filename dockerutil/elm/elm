@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker run --user $(id -u):$(id -g) -it --rm -v "$(pwd):/code" -v "/tmp:/tmp" -w "/code" -e "HOME=/tmp" -u $UID:$GID -p 8000:8000 rcs/elm:0.19
+
+exit 0

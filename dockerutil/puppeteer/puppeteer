@@ -1,0 +1,9 @@
+#!/bin/bash
+
+JS="$1"
+
+ # docker run -i --rm --cap-add=SYS_ADMIN --name puppeteer-chrome alekzonder/puppeteer node -e "`cat example.js`"
+
+docker run --shm-size 1G --rm -v $(pwd)/$JS:/app/index.js alekzonder/puppeteer:latest
+
+exit 0

@@ -2,20 +2,54 @@
 
 LOC="rcs"
 
-HASKELL_VER="8.4"
 
-if [[ -z "$1" ]]; then
-    echo "Using default Haskell version: $HASKELL_VER"
+usage()
+{
+cat << EOF
+usage: $0 options
+
+OPTIONS:
+   -h      Show this message
+   -v      Haskell image version. Default: 8.4
+   -r      Run as root
+EOF
+}
+
+HASKELL_VER="8.4"
+ROOT="0"
+while getopts “hrv:” OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         r)
+             ROOT="1"
+             ;;
+         v)
+             HASKELL_VER=$OPTARG
+             ;;
+         ?)
+             usage
+             exit
+             ;;
+     esac
+done
+
+
+#if [[ -z "$1" ]]; then
+#    echo "Using default Haskell version: $HASKELL_VER"
+#else
+#    HASKELL_VER="$1"
+#fi
+
+if [ "$ROOT" = "1" ]; then
+  docker run --name haskell1 -it --rm -v /home/"$LOC"/opt:/home/"$LOC"/opt -v /home/"$LOC"/.cabal:/root/.cabal "$LOC"/haskell:$HASKELL_VER
 else
-    HASKELL_VER="$1"
+  docker run --name haskell1 --user $(id -u):$(id -g) -it --rm -v /home/"$LOC"/opt:/home/"$LOC"/opt -v /home/"$LOC"/.cabal:/root/.cabal "$LOC"/haskell:$HASKELL_VER
 fi
 
-
-# docker run -it --rm -v /home/"$1"/opt:/home/"$1"/opt -v /home/"$1"/.cabal:/root/.cabal "$1"/haskell:1.0  
-docker run -it --rm -v /home/"$LOC"/opt:/home/"$LOC"/opt -v /home/"$LOC"/.cabal:/root/.cabal "$LOC"/haskell:$HASKELL_VER
-
-echo $HASKELL_VER 
+echo $HASKELL_VER
 
 exit 0
-
-

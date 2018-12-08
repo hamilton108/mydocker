@@ -6,6 +6,6 @@ REPO="$2"
 
 CMD="$3"
 
-docker run --rm -it -v "$(pwd):/code" -w "/code" x/svn:1.0 $CMD svn://$URL/$REPO 
+docker run --rm -it -v "$(pwd):/code" -w "/code" rcs/svn:alpine-3.8 $CMD svn://$URL/$REPO 
 
 exit 0
