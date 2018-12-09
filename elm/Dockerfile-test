@@ -1,0 +1,7 @@
+FROM rcs/elm:0.19
+
+MAINTAINER Hamilton
+
+RUN npm install -g elm-test
+
+ENTRYPOINT ["elm-test"]

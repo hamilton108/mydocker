@@ -1,0 +1,7 @@
+#!/bin/bash
+
+DOCKER_IMG="rcs/elm-test:0.19"
+
+docker run --user $(id -u):$(id -g) -it --rm -v "$(pwd):/code" -v "/tmp:/tmp" -w "/code" -e "HOME=/tmp" $DOCKER_IMG "$@"
+
+exit 0
