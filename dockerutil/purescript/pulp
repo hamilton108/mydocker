@@ -1,8 +1,8 @@
 #!/bin/bash
 
-PURE_VER="gyeh/purescript:0.12.0"
+#PURE_VER="gyeh/purescript:0.12.0"
 #PURE_VER="gyeh/purescript:0.11.5"
-#PURE_VER="rcs/purescript:0.12"
+PURE_VER="rcs/purescript:0.12"
 
 docker run --rm -itv $PWD:/home/pureuser $PURE_VER pulp "$@"
 
