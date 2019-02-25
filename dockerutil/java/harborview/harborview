@@ -1,5 +1,7 @@
 #!/bin/bash
 
-docker run -it --rm -p 6346:6346 -v /home/rcs/opt/java/harborview/dist/critters-dbcp.properties:/home/rcs/harborview/critters-dbcp.properties:ro rcs/harborview:0.9
+#docker run -it --rm -p 6346:6346 -v /home/rcs/opt/java/harborview/dist/critters-dbcp.properties:/home/rcs/harborview/critters-dbcp.properties:ro rcs/harborview:0.9
+
+docker run --name harborview-0.9 -d -p 6346:6346 -v /home/rcs/opt/java/harborview/dist/critters-dbcp.properties:/home/rcs/harborview/critters-dbcp.properties:ro rcs/harborview:0.9 
 
 exit 0
