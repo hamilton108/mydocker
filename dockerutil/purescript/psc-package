@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PURE_VER="rcs/purescript:0.13"
+PURE_VER="rcs/purescript:0.13.2"
 
 docker run --rm -itv $PWD:/home/pureuser $PURE_VER psc-package "$@"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PG_VER="rcs/postgres:1.0"
+PG_VER="rcs/postgres:11.1"
 
 
 usage()

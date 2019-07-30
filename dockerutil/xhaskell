@@ -1,8 +1,5 @@
 #!/bin/bash
 
-LOC="rcs"
-
-
 usage()
 {
 cat << EOF
@@ -15,7 +12,8 @@ OPTIONS:
 EOF
 }
 
-HASKELL_VER="8.4"
+# HASKELL_VER="rcs/haskell:8.6.5"
+HASKELL_VER="rcs/haskell:8.6"
 ROOT="0"
 while getopts “hrv:” OPTION
 do
@@ -45,9 +43,9 @@ done
 #fi
 
 if [ "$ROOT" = "1" ]; then
-  docker run --name haskell1 -it --rm -v /home/"$LOC"/opt:/home/"$LOC"/opt -v /home/"$LOC"/.cabal:/root/.cabal "$LOC"/haskell:$HASKELL_VER
+  docker run --name haskell1 -it --rm -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/.cabal:/root/.cabal $HASKELL_VER
 else
-  docker run --name haskell1 --user $(id -u):$(id -g) -it --rm -v /home/"$LOC"/opt:/home/"$LOC"/opt -v /home/"$LOC"/.cabal:/root/.cabal "$LOC"/haskell:$HASKELL_VER
+  docker run --name haskell1 --user $(id -u):$(id -g) -it --rm -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/.cabal:/root/.cabal $HASKELL_VER
 fi
 
 echo $HASKELL_VER
