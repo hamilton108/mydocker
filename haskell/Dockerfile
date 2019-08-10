@@ -13,7 +13,10 @@ RUN apt-get update
 
 # RUN cabal update
 
-# RUN cabal install hmatrix hunit containers xml mtl postgresql-simple utf8-string cmdlib cmdargs
+# RUN cabal install hmatrix hunit containers xml mtl postgresql-simple utf8-string ccmdlib cmdargs
+
+
+RUN stack --system-ghc install hpack
 
 ENTRYPOINT ["/bin/bash"]
 
