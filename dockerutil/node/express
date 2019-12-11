@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# NODE_VER="9.11-alpine"
+
+NODE_VER="13.3-alpine3.10"
+
+docker run -it --rm --name express -v "$PWD":/usr/src/app -w /usr/src/app node:$NODE_VER npm express "$@"
+
+exit 0

@@ -2,7 +2,10 @@
 
 #PURE_VER="gyeh/purescript:0.12.0"
 #PURE_VER="gyeh/purescript:0.11.5"
-PURE_VER="rcs/purescript:0.13.2"
+
+#PURE_VER="rcs/purescript:0.13.4"
+
+PURE_VER="rcs/purescript:0.13.5"
 
 docker run --rm -itv $PWD:/home/pureuser $PURE_VER pulp "$@"
 
