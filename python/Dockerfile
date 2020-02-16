@@ -7,4 +7,6 @@ RUN pip install --upgrade pip
 
 RUN pip install yfinance --upgrade --no-cache-dir
 
+WORKDIR /etradejanitor
+
 
