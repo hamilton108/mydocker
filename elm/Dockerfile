@@ -1,6 +1,4 @@
-# FROM node:9.11-alpine
-# FROM node:10.8
-FROM node:13.3-alpine3.10
+FROM node:13.8-alpine3.10
 
 MAINTAINER Hamilton
 
