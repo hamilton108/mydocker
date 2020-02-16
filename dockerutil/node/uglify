@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker run --user $(id -u):$(id -g) -it --rm -v $(pwd):/js -w /js --name uglify rcs/node:13.3 uglifyjs "$@"
+docker run --user $(id -u):$(id -g) -it --rm -v $(pwd):/js -w /js --name uglify rcs/node:13.8 uglifyjs "$@"
 
 exit 0

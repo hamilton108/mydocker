@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker build -t rcs/node:13.3 . 
+docker build -t rcs/node:13.8 . 
 
 exit 0
