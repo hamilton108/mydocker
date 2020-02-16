@@ -4,6 +4,6 @@
 
 NODE_VER="13.3-alpine3.10"
 
-docker run -it --rm --name node1 -v "$PWD":/usr/src/app -w /usr/src/app node:$NODE_VER node "$@"
+docker run -it --rm --name node1 -p 9000:9000 -v "$PWD":/usr/src/app -w /usr/src/app node:$NODE_VER node "$@"
 
 exit 0
