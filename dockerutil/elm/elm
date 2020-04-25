@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER_IMG="rcs/elm:0.19"
+DOCKER_IMG="rcs/elm:0.19.1"
 
 TMP="/home/rcs/opt/elmcommon"
 
