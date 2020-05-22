@@ -1,0 +1,30 @@
+---
+version: '3'
+services:
+    pg:
+        image: rcs/postgres:11.1
+        # container_name: postgres_hilo
+        container_name: postgres1
+        networks:
+            lofsrud:
+                ipv4_address: 172.20.1.3
+        ports:
+            - 5432:5432
+        volumes:
+            - /home/rcs/database/dockervolumes/postgres/data:/var/lib/postgresql/data 
+        environment:
+            POSTGRES_PASSWORD: ok
+        #depends_on: 
+        #    - redis
+    redis:
+        image: redis:6.0.1-alpine
+        container_name: redis1
+        networks:
+            lofsrud:
+                ipv4_address: 172.20.1.2
+
+networks:
+    lofsrud:
+        ipam:
+            config:
+                - subnet: 172.20.0.0/16
