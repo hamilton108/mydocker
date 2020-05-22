@@ -12,15 +12,17 @@ OPTIONS:
    -h      Show this message
    -d      Database name 
    -f      Dump file 
-   -c      Container name (default: postgres_hilo)
+   -c      Container name (default: postgres1)
+   -n      Network
 EOF
 }
 
 DATABASE_NAME=
 DUMP_FILE=
-CONTAINER_NAME="postgres_hilo"
+CONTAINER_NAME="postgres1"
+NETWORK="bridge"
 
-while getopts "hd:f:c:" OPTION
+while getopts "hd:f:c:n:" OPTION
 do
      case $OPTION in
          h)
@@ -35,6 +37,9 @@ do
              ;;
          c)
              CONTAINER_NAME=$OPTARG
+             ;;
+         n)
+             NETWORK=$OPTARG
              ;;
          ?)
              usage
@@ -56,10 +61,8 @@ fi
 
 echo "Importing dump file '$DUMP_FILE' to database '$DATABASE_NAME'... (container: $CONTAINER_NAME)"
 
-docker run --rm --interactive --link $CONTAINER_NAME:postgres --volume $PWD/:/tmp/ $PG_VER \
+docker run --rm --interactive --network $NETWORK --link $CONTAINER_NAME:postgres --volume $PWD/:/tmp/ $PG_VER \
     bash -c "export PGPASSWORD='ok'; exec psql -h postgres -p 5432 -U postgres -d $DATABASE_NAME < /tmp/$DUMP_FILE"
-
-#    bash -c 'export PGPASSWORD='ok'; exec psql -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d $DATABASE_NAME < /tmp/$DUMP_FILE'
 
 
 exit 0

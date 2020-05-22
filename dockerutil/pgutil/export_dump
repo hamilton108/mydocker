@@ -13,18 +13,19 @@ OPTIONS:
    -d      Database name. Default: (\$DATABASE_NAME.dmp)
    -r      Dump dir. Default: $PWD 
    -f      Dump file 
-   -c      Container name (default: postgres_hilo)
+   -c      Container name (default: postgres1)
    -x      Gzip dump file. Default: false
 EOF
 }
 
 DATABASE_NAME=
 DUMP_FILE=
-CONTAINER_NAME="postgres_hilo"
+CONTAINER_NAME="postgres1"
 DUMP_DIR=
 GZIP="0"
+NETWORK="bridge"
 
-while getopts "hd:r:f:c:x" OPTION
+while getopts "hd:r:f:c:n:x" OPTION
 do
      case $OPTION in
          h)
@@ -42,6 +43,9 @@ do
              ;;
          c)
              CONTAINER_NAME=$OPTARG
+             ;;
+         n)
+             NETWORK=$OPTARG
              ;;
          x)
              GZIP="1"
@@ -69,7 +73,7 @@ fi
 
 echo "Exporting database '$DATABASE_NAME' to dump file '$DUMP_FILE' ... (container: $CONTAINER_NAME)"
 
-docker run --rm --interactive --link $CONTAINER_NAME:postgres --volume $DUMP_DIR/:/tmp/ $PG_VER \
+docker run --rm --interactive --network $NETWORK --link $CONTAINER_NAME:postgres --volume $DUMP_DIR/:/tmp/ $PG_VER \
     bash -c "export PGPASSWORD='ok'; exec pg_dump -h postgres -p 5432 -U postgres -d $DATABASE_NAME > /tmp/$DUMP_FILE"
 
 if [ $GZIP == "1" ];
