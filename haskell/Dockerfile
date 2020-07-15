@@ -1,10 +1,10 @@
-FROM haskell:8.6.5
+FROM haskell:8.10.1
 
 MAINTAINER Hamilton 
 
-RUN apt-get update 
+# RUN apt-get update 
 
-RUN apt-get -y install libblas-dev libatlas-dev liblapack-dev libgsl0-dev libghc-postgresql-libpq-dev libicu-dev libtinfo-dev curl
+# RUN apt-get -y install libblas-dev libatlas-dev liblapack-dev libgsl0-dev libghc-postgresql-libpq-dev libicu-dev libtinfo-dev curl
 
 # RUN apt-get -y install libblas-dev libatlas-dev liblapack-dev libgsl0-dev libghc-postgresql-libpq-dev libicu-dev libssl-dev openssl wget
 
@@ -16,8 +16,11 @@ RUN apt-get -y install libblas-dev libatlas-dev liblapack-dev libgsl0-dev libghc
 
 # RUN cabal install hmatrix hunit containers xml mtl postgresql-simple utf8-string ccmdlib cmdargs
 
+# RUN stack --system-ghc install hpack
 
-RUN stack --system-ghc install hpack
+RUN stack setup 
+
+RUN stack install hpack
 
 ENTRYPOINT ["/bin/bash"]
 
