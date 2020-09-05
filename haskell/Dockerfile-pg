@@ -1,0 +1,10 @@
+FROM rcs/haskell:8.10.1
+
+MAINTAINER Hamilton 
+
+RUN apt update 
+
+RUN apt -y install libgsl0-dev libghc-postgresql-libpq-dev libicu-dev libtinfo-dev 
+
+ENTRYPOINT ["/bin/bash"]
+

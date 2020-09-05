@@ -12,7 +12,7 @@ OPTIONS:
 EOF
 }
 
-HASKELL_VER="rcs/haskell:8.10.1"
+HASKELL_VER="rcs/haskell-pg:8.10.1"
 ROOT="0"
 while getopts “hrv:” OPTION
 do
@@ -42,10 +42,9 @@ done
 #fi
 
 if [ "$ROOT" = "1" ]; then
-  # docker run --name haskell1 -it --rm -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/opt/.stack:/root/.stack $HASKELL_VER
-  docker run --name haskell1 -it --rm -v /home/rcs/opt:/home/rcs/opt $HASKELL_VER
+  docker run -it --rm -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/opt/.stack:/root/.stack $HASKELL_VER
 else
-  docker run --name haskell1 --user $(id -u):$(id -g) -it --rm -v /home/rcs/opt:/home/rcs/opt $HASKELL_VER
+  docker run --user $(id -u):$(id -g) -it --rm -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/opt/.stack:/root/.stack $HASKELL_VER
 fi
 
 echo $HASKELL_VER

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker build -t rcs/haskell-pg:8.10.1 -f Dockerfile-pg . 
+
+exit 0
