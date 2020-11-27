@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker build -t rcs/haskell-brittany:8.10.1 -f Dockerfile-brittany . 
+
+exit 0

@@ -1,0 +1,8 @@
+FROM rcs/haskell:8.10.1
+
+MAINTAINER Hamilton 
+
+RUN stack install brittany
+
+ENTRYPOINT ["/bin/bash"]
+

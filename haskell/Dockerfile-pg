@@ -1,4 +1,4 @@
-FROM rcs/haskell:8.10.1
+FROM rcs/haskell-brittany:8.10.1
 
 MAINTAINER Hamilton 
 

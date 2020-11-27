@@ -46,9 +46,9 @@ done
 #fi
 
 if [ "$ROOT" = "1" ]; then
-  docker run -it --rm --network $NETWORK -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/opt/.stack:/root/.stack $HASKELL_VER
+  docker run -it --rm --network $NETWORK -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/opt/.stack:/root/.stack -v /home/rcs/opt/.local/bin/brittany:/root/.local/bin/brittany $HASKELL_VER
 else
-  docker run --network $NETWORK --user $(id -u):$(id -g) -it --rm -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/opt/.stack:/root/.stack $HASKELL_VER
+  docker run --network $NETWORK --user $(id -u):$(id -g) -it --rm -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/opt/.stack:/root/.stack -v /home/rcs/opt/.local/bin/brittany:/root/.local/bin/brittany $HASKELL_VER
 fi
 
 echo $HASKELL_VER
