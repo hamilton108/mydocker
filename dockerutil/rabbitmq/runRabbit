@@ -1,0 +1,11 @@
+#!/bin/bash
+
+RABBIT_VER="3.8.9-management-alpine"
+
+NODE_NAME="rabbit_node_1"
+
+CONTAINER_NAME="rabbit1"
+
+docker run -d --hostname $NODE_NAME --name $CONTAINER_NAME rabbitmq:$RABBIT_VER
+
+exit 0
