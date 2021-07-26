@@ -48,6 +48,8 @@ services:
     mongo-express:
         image: mongo-express:0.54.0
         container_name: mongo-express1 
+        depends_on: 
+            - mongo 
         networks:
             lofsrud:
                 ipv4_address: 172.20.1.6
