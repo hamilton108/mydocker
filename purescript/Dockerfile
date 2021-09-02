@@ -1,8 +1,8 @@
-FROM node:14.3.0
+FROM node:16.8.0
 
 MAINTAINER Hamilton 
 
-RUN npm install -g --unsafe-perm purescript spago
+RUN npm install -g --unsafe-perm purescript@v0.14.4 spago
 
 #ENV PURESCRIPT_DOWNLOAD_SHA1 766c6f2945ca92e9ea1a469fe150d964edb67875
 

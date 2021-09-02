@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PURE_VER="rcs/purescript:0.13.8"
+PURE_VER="rcs/purescript:0.14.4"
 
 docker run --rm -itv $PWD:/home/pureuser $PURE_VER spago "$@"
 
