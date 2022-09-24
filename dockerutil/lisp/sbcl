@@ -1,5 +1,9 @@
 #!/bin/bash
 
-docker run --rm -it -v $PWD:/usr/local/share/common-lisp/source daewok/lisp-devel:latest sbcl
+SBCL="fukamachi/sbcl:2.2.0-alpine"
+
+# docker run --rm -it -v $PWD:/usr/local/share/common-lisp/source daewok/lisp-devel:latest sbcl
+
+docker run --rm -it -v $PWD:/home/rcs/sbcl $SBCL 
 
 exit 0
