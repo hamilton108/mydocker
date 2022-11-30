@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker build -t rcs/haskell:8.10.1 . 
+docker build -t rcs/haskell:9.4.3 . 
 
 exit 0

@@ -1,0 +1,10 @@
+FROM haskell:9.4.3-slim
+
+MAINTAINER Hamilton 
+
+RUN apt update 
+
+RUN apt -y install libgsl0-dev libghc-postgresql-libpq-dev libicu-dev libtinfo-dev 
+
+ENTRYPOINT ["/bin/bash"]
+

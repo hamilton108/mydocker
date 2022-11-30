@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker build -t rcs/haskell-pg:9.4.3-slim -f Dockerfile-pg-slim . 
+
+exit 0

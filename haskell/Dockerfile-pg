@@ -1,6 +1,14 @@
-FROM rcs/haskell-brittany:8.10.1
+FROM rcs/haskell:9.4.3 as builder
+
+# FROM rcs/haskell-brittany:8.10.1
+
+FROM haskell:9.4.3
 
 MAINTAINER Hamilton 
+
+RUN mkdir -p /root/.local/bin
+
+COPY --from=builder /root/.local/bin/hpack /root/.local/bin/hpack
 
 RUN apt update 
 
