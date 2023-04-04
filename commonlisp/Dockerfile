@@ -1,4 +1,4 @@
-FROM debian:8.5
+FROM fukamachi/sbcl:2.2.0-alpine
 
 MAINTAINER Hamilton 
 

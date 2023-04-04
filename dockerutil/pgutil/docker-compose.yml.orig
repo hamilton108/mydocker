@@ -10,7 +10,7 @@ services:
         ports:
             - 5432:5432
         volumes:
-            - /home/rcs/database/dockervolumes/postgres/data:/var/lib/postgresql/data
+            - /home/rcs/database/dockervolumes/postgres/data:/var/lib/postgresql/data 
         environment:
             POSTGRES_PASSWORD: ok
         #depends_on: 
@@ -23,18 +23,42 @@ services:
                 ipv4_address: 172.20.1.2
     rabbitmq:
         image: rabbitmq:3.8.9-management-alpine
-        container_name: rabbitmq1
+        container_name: rabbitmq1 
         hostname: rabbit_node_1
         networks:
             lofsrud:
                 ipv4_address: 172.20.1.4
-        # ports:
-        #    - 15672:15672
+        ports:
+            - 15672:15672
         environment:
             RABBITMQ_DEFAULT_VHOST: etradejanitor_vhost
             RABBITMQ_DEFAULT_USER: etradejanitor
             RABBITMQ_DEFAULT_PASS: VhCHeUJ40
         # http://172.20.1.4:15672
+    mongo:
+        image: mongo:4.4.2-bionic
+        container_name: mongo1 
+        networks:
+            lofsrud:
+                ipv4_address: 172.20.1.5
+        volumes:
+            - /home/rcs/database/dockervolumes/mongo/data:/data/db
+        ports:
+            - 27017:2701
+    mongo-express:
+        image: mongo-express:0.54.0
+        container_name: mongo-express1 
+        depends_on: 
+            - mongo 
+        networks:
+            lofsrud:
+                ipv4_address: 172.20.1.6
+        ports:
+            - 8081:8081 
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: rcs
+            ME_CONFIG_MONGODB_ADMINPASSWORD: VhCHeUJ4
+            ME_CONFIG_MONGODB_PORT: 27017
 networks:
     lofsrud:
         ipam:

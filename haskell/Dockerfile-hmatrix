@@ -1,0 +1,10 @@
+FROM rcs/haskell-pg:9.4.3 
+
+MAINTAINER Hamilton 
+
+RUN apt update 
+
+RUN apt-get -y install libblas-dev libatlas-base-dev liblapack-dev 
+
+ENTRYPOINT ["/bin/bash"]
+
