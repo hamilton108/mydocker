@@ -1,6 +1,7 @@
 #!/bin/bash
 
-HASKELL_VER="rcs/haskell-pg:8.10.1"
+# HASKELL_VER="rcs/haskell-pg:9.4.3-slim"
+HASKELL_VER="rcs/haskell-pg:9.4.3"
 ROOT="0"
 NETWORK="pgutil_lofsrud"
 
@@ -49,7 +50,8 @@ done
 #fi
 
 if [ "$ROOT" = "1" ]; then
-  docker run -it --rm --network $NETWORK -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/opt/.stack:/root/.stack -v /home/rcs/opt/.local/bin/brittany:/root/.local/bin/brittany -w /home/rcs/opt $HASKELL_VER
+  # docker run -it --rm --network $NETWORK -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/opt/.stack:/root/.stack -v /home/rcs/opt/.local/bin/brittany:/root/.local/bin/brittany -w /home/rcs/opt $HASKELL_VER
+  docker run -it --rm --network $NETWORK -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/opt/.stack:/root/.stack -w /home/rcs/opt $HASKELL_VER
 else
   docker run --network $NETWORK --user $(id -u):$(id -g) -it --rm -v /home/rcs/opt:/home/rcs/opt -v /home/rcs/opt/.stack:/root/.stack -v /home/rcs/opt/.local/bin/brittany:/root/.local/bin/brittany -w /home/rcs/opt $HASKELL_VER
 fi
